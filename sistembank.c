@@ -18,12 +18,16 @@ typedef struct
 /*
 void BacaFile
 void SimpanDatakeFIle
+void BackupData
+void restoreData
 void TambahNasabah
-void UpdateSaldoNasabah
 void HapusNasabah
+void UpdateSaldoNasabah
 void TampilkanNasabah
-void CariNasabah (Berdasarkan nama/saldo)
-void UrutkanNasabah (Berdasarkan id/nama/saldo)
+void CariNasabah (Berdasarkan nama)
+void CariNasabah (Berdasarkan saldo)
+void UrutkanNasabah (Berdasarkan id)
+void UrutkanNasabah (Berdasarkan Nama)
 */
 
 int main (){
