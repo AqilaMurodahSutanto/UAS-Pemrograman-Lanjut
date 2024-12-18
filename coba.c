@@ -6,6 +6,7 @@ struct Mahasiswa {
     char Nama[100];
     char prodi[25];
     float IPK;
+    int test;
 };
 
 // Fungsi untuk mencetak data mahasiswa
