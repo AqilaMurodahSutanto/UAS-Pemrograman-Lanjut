@@ -59,6 +59,10 @@ void UrutkanNasabah (Berdasarkan id)
 void UrutkanNasabah (Berdasarkan Nama)
 */
 
+void RestoreData (Nasabah data[], int *jumlahnasabah){
+
+}
+
 int main (){
     int pilihan;
 
