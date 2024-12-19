@@ -14,6 +14,35 @@ typedef struct
     int statusAkun;         // Status Akun (misalnya, 1 untuk aktif, 0 untuk non-aktif)
 }Nasabah;
 
+void TambahNasabah()
+{
+    printf("Masukkan ID Nasabah: ");
+    scanf("%d", &nasabah[jumlahNasabah].id);
+    getchar();
+    printf("Masukkan Nama Lengkap: ");
+    fgets(nasabah[jumlahNasabah].namalengkap, 100, stdin);
+    nasabah[jumlahNasabah].namalengkap[strcspn(nasabah[jumlahNasabah].namalengkap, "\n")] = '\0';
+    printf("Masukkan Saldo: ");
+    scanf("%f", &nasabah[jumlahNasabah].saldo);
+    getchar();
+    printf("Masukkan Alamat: ");
+    fgets(nasabah[jumlahNasabah].alamat, 100, stdin);
+    nasabah[jumlahNasabah].alamat[strcspn(nasabah[jumlahNasabah].alamat, "\n")] = '\0';
+    printf("Masukkan Nomor Telepon: ");
+    fgets(nasabah[jumlahNasabah].nomorTelepon, 15, stdin);
+    nasabah[jumlahNasabah].nomorTelepon[strcspn(nasabah[jumlahNasabah].nomorTelepon, "\n")] = '\0';
+    printf("Masukkan Jenis Akun (Tabungan/Giro): ");
+    fgets(nasabah[jumlahNasabah].jenisAkun, 20, stdin);
+    nasabah[jumlahNasabah].jenisAkun[strcspn(nasabah[jumlahNasabah].jenisAkun, "\n")] = '\0';
+    printf("Masukkan Tanggal Lahir (dd/mm/yyyy): ");
+    fgets(nasabah[jumlahNasabah].tanggalLahir, 11, stdin);
+    nasabah[jumlahNasabah].tanggalLahir[strcspn(nasabah[jumlahNasabah].tanggalLahir, "\n")] = '\0';
+    printf("Masukkan Status Akun (1: Aktif, 0: Non-Aktif): ");
+    scanf("%d", &nasabah[jumlahNasabah].statusAkun);
+
+    jumlahNasabah++;
+    printf("Nasabah berhasil ditambahkan!\n");
+}
 //funfsi2
 /*
 void BacaFile
