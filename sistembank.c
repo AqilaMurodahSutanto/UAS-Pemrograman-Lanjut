@@ -14,6 +14,9 @@ typedef struct
     int statusAkun;         // Status Akun (misalnya, 1 untuk aktif, 0 untuk non-aktif)
 }Nasabah;
 
+Nasabah nasabah[100];
+int jumlahNasabah = 0;
+
 void TambahNasabah()
 {
     printf("Masukkan ID Nasabah: ");
@@ -63,8 +66,25 @@ void RestoreData (Nasabah data[], int *jumlahnasabah){
 
 }
 
+void UrutkanNasabahID(Nasabah rekening[], int n) {
+    for (int i = 1; i < n; i++) {
+        Nasabah key = rekening[i];  
+        int j = i - 1;
+
+        while (j >= 0 && rekening[j].id > key.id) {
+            rekening[j + 1] = rekening[j];
+            j = j - 1;
+        }
+
+        rekening[j + 1] = key;  
+    }
+    printf("Data nasabah berhasil diurutkan berdasarkan ID.\n");
+}
+
+
 int main (){
     int pilihan;
+    int pil_sort;
 
     printf("==========Sistem Manajemen Bank===========\n");
     printf("\nMenu Utama:\n");
@@ -84,7 +104,18 @@ int main (){
         case 1:
             /* code */
             break;
-        
+        case 5: 
+        printf("\nUrutkan berdasarkan ID atau Nama (1 = ID, 2 = Nama): ");
+        scanf("%d", &pil_sort);  
+        if (pil_sort == 1) {
+            UrutkanNasabahID(nasabah, jumlahNasabah);  
+        } else if (pil_sort == 2) {
+             // Fungsi untuk mengurutkan berdasarkan Nama
+        } else {
+            printf("Pilihan tidak valid.\n");
+        }
+        break;
+
         default:
             break;
         }
