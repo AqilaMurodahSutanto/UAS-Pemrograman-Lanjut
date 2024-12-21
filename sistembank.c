@@ -66,17 +66,17 @@ void RestoreData (Nasabah data[], int *jumlahnasabah){
 
 }
 
-void UrutkanNasabahID(Nasabah rekening[], int n) {
-    for (int i = 1; i < n; i++) {
-        Nasabah key = rekening[i];  
+void UrutkanNasabahID() {
+    for (int i = 1; i < jumlahNasabah; i++) {
+        Nasabah key = nasabah[i];  
         int j = i - 1;
 
-        while (j >= 0 && rekening[j].id > key.id) {
-            rekening[j + 1] = rekening[j];
+        while (j >= 0 && nasabah[j].id > key.id) {
+            nasabah[j + 1] = nasabah[j];
             j = j - 1;
         }
 
-        rekening[j + 1] = key;  
+        nasabah[j + 1] = key;  
     }
     printf("Data nasabah berhasil diurutkan berdasarkan ID.\n");
 }
