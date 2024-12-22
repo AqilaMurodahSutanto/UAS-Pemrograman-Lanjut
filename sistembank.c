@@ -78,6 +78,11 @@ void cariBerdasarkanNama(char *keyword) {
 
 // Fungsi untuk mencari nasabah berdasarkan jenis akun
 void cariBerdasarkanJenisAkun(char *keyword) {
+    // printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+    // printf("|%-4s| %-15s| %-15s| %-15s| %-15s| %-10s| %-13s|%-5s|\n", 
+    //         "ID", "Nama", "Saldo", "Alamat", "Telepon", "Akun", "Tgl Lahir", "Status");
+    // printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+    printf("Data Ditemukan\n");
     for (int i = 0; i < jumlahNasabah; i++) {
         if (strstr(nasabah[i].jenisAkun, keyword)) {
             printf("ID: %d\nNama: %s\nSaldo: %.2f\nAlamat: %s\nNomor Telepon: %s\nJenis Akun: %s\nTanggal Lahir: %s\nStatus Akun: %s\n\n",
@@ -90,14 +95,33 @@ void cariBerdasarkanJenisAkun(char *keyword) {
 
 // Fungsi untuk mencari nasabah berdasarkan status akun
 void cariBerdasarkanStatusAkun(int status) {
+    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+    printf("|%-4s| %-15s| %-15s| %-15s| %-15s| %-10s| %-13s|%-5s|\n", 
+            "ID", "Nama", "Saldo", "Alamat", "Telepon", "Akun", "Tgl Lahir", "Status");
+    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
     for (int i = 0; i < jumlahNasabah; i++) {
         if (nasabah[i].statusAkun == status) {
-            printf("ID: %d\nNama: %s\nSaldo: %.2f\nAlamat: %s\nNomor Telepon: %s\nJenis Akun: %s\nTanggal Lahir: %s\nStatus Akun: %s\n\n",
-                   nasabah[i].id, nasabah[i].namalengkap, nasabah[i].saldo,
-                   nasabah[i].alamat, nasabah[i].nomorTelepon, nasabah[i].jenisAkun,
-                   nasabah[i].tanggalLahir, (status == 1) ? "Aktif" : "Non-Aktif");
+            
+            char *statusAkun;
+            if (status == 1) {
+                statusAkun = "Aktif";
+            } else {
+                statusAkun = "Non-Aktif";
+            }
+
+            // Menampilkan informasi nasabah dengan format yang benar
+            printf("|%-4d| %-15s| %-15.2f| %-15s| %-15s| %-10s| %-13s| %-5s|\n", 
+                nasabah[i].id, 
+                nasabah[i].namalengkap, 
+                nasabah[i].saldo, 
+                nasabah[i].alamat, 
+                nasabah[i].nomorTelepon, 
+                nasabah[i].jenisAkun, 
+                nasabah[i].tanggalLahir, 
+                statusAkun);  // Mengganti status dengan statusAkun (string)
         }
     }
+    
 }
 
 int cariId(int id) {
@@ -191,7 +215,6 @@ void tampilkanSemua() {
             status = "Non-Aktif";
         }
 
-
         // Menampilkan data nasabah dalam format tabel
         printf("|%-4d| %-15s| %-15.2f| %-15s| %-15s| %-10s| %-13s| %-5s|\n", 
                 nasabah[i].id, 
@@ -237,6 +260,52 @@ void sortingBerdasarkanSaldo() {
 
     printf("Data berhasil diurutkan berdasarkan saldo!\n");
 }
+// Fungsi untuk melakukan transfer saldo antar nasabah
+void transferSaldo() {
+    int idPengirim, idPenerima;
+    float jumlahTransfer;
+
+    // Input ID Pengirim dan Penerima
+    printf("Masukkan ID Pengirim: ");
+    scanf("%d", &idPengirim);
+    printf("Masukkan ID Penerima: ");
+    scanf("%d", &idPenerima);
+
+    // Mencari ID Pengirim dan Penerima
+    int indexPengirim = cariId(idPengirim);
+    int indexPenerima = cariId(idPenerima);
+
+    if (indexPengirim == -1) {
+        printf("Nasabah Pengirim tidak ditemukan!\n");
+        return;
+    }
+
+    if (indexPenerima == -1) {
+        printf("Nasabah Penerima tidak ditemukan!\n");
+        return;
+    }
+
+    // Input jumlah transfer
+    printf("Masukkan jumlah yang akan ditransfer: ");
+    scanf("%f", &jumlahTransfer);
+
+    // Memeriksa apakah saldo pengirim cukup
+    if (nasabah[indexPengirim].saldo < jumlahTransfer) {
+        printf("Saldo Pengirim tidak cukup untuk melakukan transfer!\n");
+        return;
+    }
+
+    // Melakukan transfer saldo
+    nasabah[indexPengirim].saldo -= jumlahTransfer; // Kurangi saldo pengirim
+    nasabah[indexPenerima].saldo += jumlahTransfer; // Tambah saldo penerima
+
+    // Simpan data setelah transfer
+    simpanKeFile();
+
+    printf("Transfer berhasil!\n");
+    printf("Saldo Pengirim: %.2f\n", nasabah[indexPengirim].saldo);
+    printf("Saldo Penerima: %.2f\n", nasabah[indexPenerima].saldo);
+}
 
 void menu() {
     int pilihan;
@@ -267,7 +336,7 @@ void menu() {
                 tampilkanSemua();
                 break;
             case 5:
-                bacaDariFile();
+                //bacaDariFile();
                 printf("Pilih cara pencarian:\n");
                 printf("1. Berdasarkan Nama\n");
                 printf("2. Berdasarkan Jenis Akun\n");
@@ -298,12 +367,17 @@ void menu() {
                     }
                 break;
             case 6:
-                bacaDariFile();
+                //bacaDariFile();
                 sortingBerdasarkanId();
+                tampilkanSemua();
                 break;
-            case 7: // Menambahkan case untuk sorting saldo
-                bacaDariFile();
+            case 7: 
+                //bacaDariFile();
                 sortingBerdasarkanSaldo();
+                tampilkanSemua();
+                break;
+            case 8: 
+                transferSaldo();
                 break;
             case 0:
                 printf("Terima kasih telah menggunakan Sistem Manajemen Bank!\n");
