@@ -1,0 +1,3 @@
+1,aqila murodah,5000000000.00,asemrowo,098655355687,tabungan,29/09/2005,1
+2,Abe Cekut S.kom,20000000.00,Batu Malang,08396472920,Giro,12/12/2002,1
+3,Acha,60000000.00,Rungkut,086344748936,Tabungan,17/02/2003,1

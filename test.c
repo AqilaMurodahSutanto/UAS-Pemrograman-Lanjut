@@ -8,7 +8,7 @@ typedef struct {
     float saldo;            // Saldo Akun
     char alamat[100];       // Alamat Nasabah
     char nomorTelepon[15];  // Nomor Telepon
-    char jenisAkun[20];     // Jenis Akun (Tabungan/Giro)
+    char jenisAkun[10];     // Jenis Akun (Tabungan/Giro)
     char tanggalLahir[11];  // Tanggal Lahir (format: dd/mm/yyyy)
     int statusAkun;         // Status Akun (misalnya, 1 untuk aktif, 0 untuk non-aktif)
 } Nasabah;
@@ -22,16 +22,18 @@ void BacaData() {
         printf("File tidak ditemukan, data tidak dapat dimuat.\n");
         return;
     }
-
-    while (fscanf(file, "%d %s %f %s %s %s %s %d\n", 
-                   &nasabah[jumlahNasabah].id, 
-                   nasabah[jumlahNasabah].namalengkap,
-                   &nasabah[jumlahNasabah].saldo,
-                   nasabah[jumlahNasabah].alamat,
-                   nasabah[jumlahNasabah].nomorTelepon,
-                   nasabah[jumlahNasabah].jenisAkun,
-                   nasabah[jumlahNasabah].tanggalLahir,
-                   &nasabah[jumlahNasabah].statusAkun) != -1) {
+    char buffer[256];
+    printf("Mulai membaca data...\n");
+    while (fgets(buffer, sizeof(buffer), file)) {
+        sscanf(buffer, "%d %s %f %[^\n] %s %s %s %d",
+               &nasabah[jumlahNasabah].id,
+               nasabah[jumlahNasabah].namalengkap,
+               &nasabah[jumlahNasabah].saldo,
+               nasabah[jumlahNasabah].alamat,
+               nasabah[jumlahNasabah].nomorTelepon,
+               nasabah[jumlahNasabah].jenisAkun,
+               nasabah[jumlahNasabah].tanggalLahir,
+               &nasabah[jumlahNasabah].statusAkun);
         jumlahNasabah++;
     }
 
@@ -154,17 +156,15 @@ void lihatNasabah() {
 
 
 int main() {
+    printf("Program dimulai...\n");
     // Pointer ke file
-    FILE *fptr;
-
-    // Membuka file dengan mode 'w' (write) untuk membuat file
-    fptr = fopen("data-nasabah.txt", "w");
-
-    // Memeriksa apakah file berhasil dibuka
-    if (fptr == NULL) {
-        printf("File tidak dapat dibuat.\n");
-        return 1;  // Keluar jika file gagal dibuka
+    FILE *file = fopen("data-nasabah.txt", "r"); // Buka file dalam mode tambah
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return 1;
     }
+    printf("File berhasil dibuka.\n");
+
     BacaData();
 
     int pilihan;
@@ -196,7 +196,7 @@ int main() {
     } while (pilihan != 4);
 
     // Menutup file setelah operasi selesai
-    fclose(fptr);
-    printf("File ditutup.\n");
+    fclose(file);
+
     return 0;
 }
