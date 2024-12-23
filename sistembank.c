@@ -78,10 +78,10 @@ void cariBerdasarkanNama(char *keyword) {
 
 // Fungsi untuk mencari nasabah berdasarkan jenis akun
 void cariBerdasarkanJenisAkun(char *keyword) {
-    // printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
-    // printf("|%-4s| %-15s| %-15s| %-15s| %-15s| %-10s| %-13s|%-5s|\n", 
-    //         "ID", "Nama", "Saldo", "Alamat", "Telepon", "Akun", "Tgl Lahir", "Status");
-    // printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+     printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+     printf("|%-4s| %-15s| %-15s| %-15s| %-15s| %-10s| %-13s|%-5s|\n", 
+             "ID", "Nama", "Saldo", "Alamat", "Telepon", "Akun", "Tgl Lahir", "Status");
+    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
     printf("Data Ditemukan\n");
     for (int i = 0; i < jumlahNasabah; i++) {
         if (strstr(nasabah[i].jenisAkun, keyword)) {
