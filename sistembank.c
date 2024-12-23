@@ -33,7 +33,19 @@ void simpanKeFile() {
     fclose(file);
 }
 
+void bacaDariFile() {
+    FILE *file = fopen("nasabah.txt", "r");
+    if (file == NULL) return; // Jika file tidak ada, tidak ada yang dibaca
 
+    while (fscanf(file, "%d,%99[^,],%f,%99[^,],%14[^,],%19[^,],%10[^,],%d\n",
+                  &nasabah[jumlahNasabah].id, nasabah[jumlahNasabah].namalengkap,
+                  &nasabah[jumlahNasabah].saldo, nasabah[jumlahNasabah].alamat,
+                  nasabah[jumlahNasabah].nomorTelepon, nasabah[jumlahNasabah].jenisAkun,
+                  nasabah[jumlahNasabah].tanggalLahir, &nasabah[jumlahNasabah].statusAkun) != EOF) {
+        jumlahNasabah++;
+    }
+    fclose(file);
+}
 
 // Fungsi untuk mencari nasabah berdasarkan nama
 void cariBerdasarkanNama(char *keyword) {
