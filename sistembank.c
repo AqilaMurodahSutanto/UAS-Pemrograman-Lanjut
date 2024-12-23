@@ -48,32 +48,28 @@ void bacaDariFile() {
 }
 
 // Fungsi untuk mencari nasabah berdasarkan nama
-void cariBerdasarkanNama(char *keyword) {
-    int ditemukan = 0;  // Menandakan apakah ada hasil pencarian
-    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
-    printf("|%-4s| %-15s| %-15s| %-15s| %-15s| %-10s| %-13s|%-5s|\n", 
-            "ID", "Nama", "Saldo", "Alamat", "Telepon", "Akun", "Tgl Lahir", "Status");
-    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
-    
+void cariBerdasarkanNama(Nasabah nasabah[], int jumlahNasabah, char namaDicari[]) {
+    int ditemukan = 0;
+    printf("Hasil pencarian berdasarkan nama:\n");
+    printf("+----+----------------------+------------+-----------------+--------+\n");
+    printf("| ID | Nama                 | Jenis Akun | Status          | Saldo  |\n");
+    printf("+----+----------------------+------------+-----------------+--------+\n");
+
     for (int i = 0; i < jumlahNasabah; i++) {
-        if (strstr(nasabah[i].namalengkap, keyword)) {
-            printf("|%-4d| %-15s| %-15.2f| %-15s| %-15s| %-10s| %-13s| %-5d|\n", 
-                nasabah[i].id, 
-                nasabah[i].namalengkap, 
-                nasabah[i].saldo, 
-                nasabah[i].alamat, 
-                nasabah[i].nomorTelepon, 
-                nasabah[i].jenisAkun, 
-                nasabah[i].tanggalLahir, 
-                nasabah[i].statusAkun);
+        if (strcmp(nasabah[i].nama, namaDicari) == 0) {
+            printf("| %-2d | %-20s | %-10s | %-15s | %-6.2f |\n",
+                   nasabah[i].id, nasabah[i].nama, nasabah[i].jenisAkun,
+                   nasabah[i].statusAkun == 1 ? "Aktif" : "Non-Aktif",
+                   nasabah[i].saldo);
             ditemukan = 1;
-            break;
         }
     }
+
     if (!ditemukan) {
-        printf("Tidak ada nasabah dengan nama yang sesuai.\n");
+        printf("Tidak ada data nasabah dengan nama '%s'.\n", namaDicari);
     }
-    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+
+    printf("+----+----------------------+------------+-----------------+--------+\n");
 }
 
 // Fungsi untuk mencari nasabah berdasarkan jenis akun
