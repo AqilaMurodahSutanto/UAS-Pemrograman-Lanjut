@@ -67,7 +67,6 @@ void cariBerdasarkanNama(char *keyword) {
                 nasabah[i].tanggalLahir, 
                 nasabah[i].statusAkun);
             ditemukan = 1;
-            break;
         }
     }
     if (!ditemukan) {
@@ -75,6 +74,7 @@ void cariBerdasarkanNama(char *keyword) {
     }
     printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
 }
+
 
 // Fungsi untuk mencari nasabah berdasarkan jenis akun
 void cariBerdasarkanJenisAkun(char *keyword) {
