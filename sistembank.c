@@ -78,15 +78,17 @@ void cariBerdasarkanNama(char *keyword) {
 
 // Fungsi untuk mencari nasabah berdasarkan jenis akun
 void cariBerdasarkanJenisAkun(char *keyword) {
+
     int dataDitemukan = 0; // Menandakan apakah ada data yang ditemukan
     
-    // Menampilkan header tabel
-    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
-    printf("|%-4s| %-15s| %-15s| %-15s| %-15s| %-10s| %-13s|%-5s|\n", 
-            "ID", "Nama", "Saldo", "Alamat", "Telepon", "Akun", "Tgl Lahir", "Status");
-    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
-
     // Mencari nasabah berdasarkan jenis akun
+
+     printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+     printf("|%-4s| %-15s| %-15s| %-15s| %-15s| %-10s| %-13s|%-5s|\n", 
+             "ID", "Nama", "Saldo", "Alamat", "Telepon", "Akun", "Tgl Lahir", "Status");
+    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+    printf("Data Ditemukan\n");
+
     for (int i = 0; i < jumlahNasabah; i++) {
         if (strstr(nasabah[i].jenisAkun, keyword)) {
             if (dataDitemukan == 0) {
@@ -139,7 +141,7 @@ void cariBerdasarkanStatusAkun(int status) {
     }
     
 }
-
+// mencari id
 int cariId(int id) {
     for (int i = 0; i < jumlahNasabah; i++) {
         if (nasabah[i].id == id) return i;
@@ -353,9 +355,9 @@ void menu() {
             case 5:
                 //bacaDariFile();
                 printf("Pilih cara pencarian:\n");
-                printf("1. Berdasarkan Nama\n");
-                printf("2. Berdasarkan Jenis Akun\n");
-                printf("3. Berdasarkan Status Akun (1: Aktif, 0: Non-Aktif)\n");
+                printf("1. Cari Berdasarkan Nama\n");
+                printf("2. Cari Berdasarkan Jenis Akun\n");
+                printf("3. Cari Berdasarkan Status Akun (1: Aktif, 0: Non-Aktif)\n");
                 printf("Masukkan pilihan: ");
                 char keyword[100];
                 int pilihan;
@@ -368,12 +370,12 @@ void menu() {
                     cariBerdasarkanNama(keyword);
                     break;
                 case 2:
-                    printf("Masukkan jenis akun yang dicari: ");
+                    printf("Masukkan jenis akun yang ingin dicari: ");
                     scanf(" %[^\n]", keyword);
                     cariBerdasarkanJenisAkun(keyword);
                     break;
                 case 3:
-                    printf("Masukkan status akun yang dicari (1: Aktif, 0: Non-Aktif): ");
+                    printf("Masukkan status akun yang ingin dicari (1: Aktif, 0: Non-Aktif): ");
                     scanf("%d", &statusAkun);
                     cariBerdasarkanStatusAkun(statusAkun);
                     break;
