@@ -337,9 +337,9 @@ void menu() {
             case 5:
                 //bacaDariFile();
                 printf("Pilih cara pencarian:\n");
-                printf("1. Berdasarkan Nama\n");
-                printf("2. Berdasarkan Jenis Akun\n");
-                printf("3. Berdasarkan Status Akun (1: Aktif, 0: Non-Aktif)\n");
+                printf("1. Cari Berdasarkan Nama\n");
+                printf("2. Cari Berdasarkan Jenis Akun\n");
+                printf("3. Cari Berdasarkan Status Akun (1: Aktif, 0: Non-Aktif)\n");
                 printf("Masukkan pilihan: ");
                 char keyword[100];
                 int pilihan;
@@ -352,12 +352,12 @@ void menu() {
                     cariBerdasarkanNama(keyword);
                     break;
                 case 2:
-                    printf("Masukkan jenis akun yang dicari: ");
+                    printf("Masukkan jenis akun yang ingin dicari: ");
                     scanf(" %[^\n]", keyword);
                     cariBerdasarkanJenisAkun(keyword);
                     break;
                 case 3:
-                    printf("Masukkan status akun yang dicari (1: Aktif, 0: Non-Aktif): ");
+                    printf("Masukkan status akun yang ingin dicari (1: Aktif, 0: Non-Aktif): ");
                     scanf("%d", &statusAkun);
                     cariBerdasarkanStatusAkun(statusAkun);
                     break;
