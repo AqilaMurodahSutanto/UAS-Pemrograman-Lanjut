@@ -78,20 +78,36 @@ void cariBerdasarkanNama(char *keyword) {
 
 // Fungsi untuk mencari nasabah berdasarkan jenis akun
 void cariBerdasarkanJenisAkun(char *keyword) {
-    // printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
-    // printf("|%-4s| %-15s| %-15s| %-15s| %-15s| %-10s| %-13s|%-5s|\n", 
-    //         "ID", "Nama", "Saldo", "Alamat", "Telepon", "Akun", "Tgl Lahir", "Status");
-    // printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
-    printf("Data Ditemukan\n");
+    int dataDitemukan = 0; // Menandakan apakah ada data yang ditemukan
+    
+    // Menampilkan header tabel
+    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+    printf("|%-4s| %-15s| %-15s| %-15s| %-15s| %-10s| %-13s|%-5s|\n", 
+            "ID", "Nama", "Saldo", "Alamat", "Telepon", "Akun", "Tgl Lahir", "Status");
+    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+
+    // Mencari nasabah berdasarkan jenis akun
     for (int i = 0; i < jumlahNasabah; i++) {
         if (strstr(nasabah[i].jenisAkun, keyword)) {
-            printf("ID: %d\nNama: %s\nSaldo: %.2f\nAlamat: %s\nNomor Telepon: %s\nJenis Akun: %s\nTanggal Lahir: %s\nStatus Akun: %s\n\n",
+            if (dataDitemukan == 0) {
+                printf("Data Ditemukan:\n");
+                dataDitemukan = 1; // Menandakan bahwa setidaknya ada satu data yang ditemukan
+            }
+            // Menampilkan informasi nasabah
+            printf("|%-4d| %-15s| %-15.2f| %-15s| %-15s| %-10s| %-13s|%-5s|\n", 
                    nasabah[i].id, nasabah[i].namalengkap, nasabah[i].saldo,
                    nasabah[i].alamat, nasabah[i].nomorTelepon, nasabah[i].jenisAkun,
                    nasabah[i].tanggalLahir, (nasabah[i].statusAkun == 1) ? "Aktif" : "Non-Aktif");
         }
     }
+    printf("+----+----------------+----------------+----------------+----------------+-----------+--------------+------+\n");
+
+    // Jika tidak ada data yang ditemukan
+    if (dataDitemukan == 0) {
+        printf("Data tidak ditemukan dengan jenis akun: %s\n", keyword);
+    }
 }
+
 
 // Fungsi untuk mencari nasabah berdasarkan status akun
 void cariBerdasarkanStatusAkun(int status) {
