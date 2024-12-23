@@ -123,23 +123,8 @@ void cariBerdasarkanStatusAkun(int status) {
     }
     
 }
+// mencari id
 
-int cariId(int id) {
-    for (int i = 0; i < jumlahNasabah; i++) {
-        if (nasabah[i].id == id) return i;
-    }
-    return -1;
-}
-
-void tambahNasabah() {
-    int id;
-    printf("Masukkan ID: ");
-    scanf("%d", &id);
-
-    if (cariId(id) != -1) {
-        printf("ID sudah ada!\n");
-        return;
-    }
 
     Nasabah baru;
     baru.id = id;
