@@ -248,18 +248,16 @@ void sortingBerdasarkanSaldo() {
         Nasabah temp = nasabah[i];
         int j = i - 1;
 
-        // Memindahkan elemen yang lebih besar dari saldo yang ingin disisipkan
         while (j >= 0 && nasabah[j].saldo > temp.saldo) {
             nasabah[j + 1] = nasabah[j];
             j--;
         }
 
-        // Menyisipkan elemen pada posisi yang benar
         nasabah[j + 1] = temp;
     }
-
     printf("Data berhasil diurutkan berdasarkan saldo!\n");
 }
+
 // Fungsi untuk melakukan transfer saldo antar nasabah
 void transferSaldo() {
     int idPengirim, idPenerima;
