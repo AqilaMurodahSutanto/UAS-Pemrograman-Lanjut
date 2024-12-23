@@ -259,6 +259,51 @@ void sortingBerdasarkanSaldo() {
 }
 
 // Fungsi untuk melakukan transfer saldo antar nasabah
+void transferSaldo() {
+    int idPengirim, idPenerima;
+    float jumlahTransfer;
+
+    // Input ID Pengirim dan Penerima
+    printf("Masukkan ID Pengirim: ");
+    scanf("%d", &idPengirim);
+    printf("Masukkan ID Penerima: ");
+    scanf("%d", &idPenerima);
+
+    // Mencari ID Pengirim dan Penerima
+    int indexPengirim = cariId(idPengirim);
+    int indexPenerima = cariId(idPenerima);
+
+    if (indexPengirim == -1) {
+        printf("Nasabah Pengirim tidak ditemukan!\n");
+        return;
+    }
+
+    if (indexPenerima == -1) {
+        printf("Nasabah Penerima tidak ditemukan!\n");
+        return;
+    }
+
+    // Input jumlah transfer
+    printf("Masukkan jumlah yang akan ditransfer: ");
+    scanf("%f", &jumlahTransfer);
+
+    // Memeriksa apakah saldo pengirim cukup
+    if (nasabah[indexPengirim].saldo < jumlahTransfer) {
+        printf("Saldo Pengirim tidak cukup untuk melakukan transfer!\n");
+        return;
+    }
+
+    // Melakukan transfer saldo
+    nasabah[indexPengirim].saldo -= jumlahTransfer; // Kurangi saldo pengirim
+    nasabah[indexPenerima].saldo += jumlahTransfer; // Tambah saldo penerima
+
+    // Simpan data setelah transfer
+    simpanKeFile();
+
+    printf("Transfer berhasil!\n");
+    printf("Saldo Pengirim: %.2f\n", nasabah[indexPengirim].saldo);
+    printf("Saldo Penerima: %.2f\n", nasabah[indexPenerima].saldo);
+}
 
 
 void menu() {
